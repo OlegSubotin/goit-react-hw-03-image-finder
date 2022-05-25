@@ -1,36 +1,36 @@
 import React, { Component } from "react";
 import { BsSearch } from 'react-icons/bs';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Notiflix from 'notiflix';
 import s from './Searchbar.module.css';
 
 class Searchbar extends Component{
     state = {
-        image: '',
+        topic: '',
     }
 
-    handleImageChange = e => {
+    handleTopicChange = e => {
         this.setState({
-            image: e.currentTarget.value.toLowerCase()
+            topic: e.currentTarget.value.toLowerCase()
         });
     };
 
     handleSubmit = e => {
         e.preventDefault();
 
-        const { image } = this.state;
-        if (image.trim() === '') {
+        const { topic } = this.state;
+        if (topic.trim() === '') {
             Notiflix.Notify.info('Put a topic you are looking for');
             return;
         };
         
-        this.props.onSubmit(image);
-        this.setState({ image: '' });
+        this.props.onSubmit(topic);
+        this.setState({ topic: '' });
     };
 
     render() {
-        const { image } = this.state;
-        const { handleImageChange, handleSubmit } = this;
+        const { topic } = this.state;
+        const { handleTopicChange, handleSubmit } = this;
         return (
             <header className={s.searchbar}>
                 <form className={s.form} onSubmit={handleSubmit}>
@@ -44,17 +44,13 @@ class Searchbar extends Component{
                         autoComplete="off"
                         autoFocus
                         placeholder="Search images and photos"
-                        value={image}
-                        onChange={handleImageChange}
+                        value={topic}
+                        onChange={handleTopicChange}
                     />
                 </form>
             </header>
         );
     }
 }
-
-Searchbar.propTypes = {
-    onSubmit: PropTypes.func,
-};
 
 export default Searchbar;
