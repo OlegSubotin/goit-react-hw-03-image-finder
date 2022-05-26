@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { BsSearch } from 'react-icons/bs';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Notiflix from 'notiflix';
 import s from './Searchbar.module.css';
 
 class Searchbar extends Component{
     state = {
         topic: '',
-    }
+    };
 
     handleTopicChange = e => {
         this.setState({
@@ -37,7 +37,6 @@ class Searchbar extends Component{
                     <button type="submit" className={s.button}>
                         <span className={s.buttonLabel}><BsSearch  fill="#3f51b5" /></span>
                     </button>
-
                     <input
                         className={s.input}
                         type="text"
@@ -50,7 +49,11 @@ class Searchbar extends Component{
                 </form>
             </header>
         );
-    }
-}
+    };
+};
+
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};
 
 export default Searchbar;
